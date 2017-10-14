@@ -22,20 +22,20 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Socket.io
- */
-
-var io = require('socket.io')();
-io.attach(server);
-require('../sockets')(io); //what the hell is this???  that module returns all the internal functions of the socket thing...  whats up?
-
-/**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Socket.io
+ */
+
+var io = app.io;
+io.listen(server);
+require('../sockets')(io); //what the hell is this???  that module returns all the internal functions of the socket thing...  whats up?
 
 /**
  * Normalize a port into a number, string, or false.
