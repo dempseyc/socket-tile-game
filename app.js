@@ -7,23 +7,19 @@ const bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-
 var app = express();
 
 var socket_io = require('socket.io');
 app.io = socket_io();
+
+// routes
 var routes = require('./routes/index');
-
-
-app.io.on( "connection", function( socket ) {
-  console.log( "A user connected" );
-});
 
 // view engine setup
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/", express.static(__dirname + '/public'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

@@ -25,8 +25,9 @@ var server = http.createServer(app);
  * Socket.io
  */
 
-var io = app.io
-io.attach( server );
+var io = require('socket.io')();
+io.attach(server);
+require('../sockets')(io); //what the hell is this???  that module returns all the internal functions of the socket thing...  whats up?
 
 /**
  * Listen on provided port, on all network interfaces.
